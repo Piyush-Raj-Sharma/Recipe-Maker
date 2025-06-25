@@ -7,35 +7,33 @@ const RecipeCard = ({ recipe }) => {
   return (
     <Link
       to={`/recipe/details/${id}`}
-      className="w-[240px] sm:w-[260px] backdrop-blur-lg bg-white/10 border border-white/10 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-transform hover:scale-[1.03]"
+      className="group w-[260px] sm:w-[280px] bg-gradient-to-br from-[#2a2a3d] to-[#1e1e2f] rounded-2xl overflow-hidden shadow-xl border border-white/10 hover:border-purple-500 transition-all duration-300 hover:scale-105"
     >
       {/* Image */}
-      <div className="h-44 overflow-hidden">
+      <div className="h-44 overflow-hidden relative">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
+        <span className="absolute top-2 left-2 bg-purple-800/80 text-purple-200 text-[11px] font-semibold px-3 py-1 rounded-full flex items-center gap-1 backdrop-blur-md shadow-sm">
+          <UtensilsCrossed size={12} />
+          {category || "Recipe"}
+        </span>
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-2 text-white">
-        {/* Category Tag */}
-        <div className="inline-flex items-center gap-1 text-[11px] bg-purple-900/30 text-purple-300 font-medium px-2 py-1 rounded-full">
-          <UtensilsCrossed size={12} />
-          {category || "Recipe"}
-        </div>
-
+      <div className="p-4 text-white flex flex-col justify-between h-[160px]">
         {/* Title */}
-        <h3 className="text-lg font-semibold truncate">{title}</h3>
+        <h3 className="text-lg font-bold truncate mb-1">{title}</h3>
 
         {/* Description */}
-        <p className="text-sm text-gray-300 line-clamp-2">
+        <p className="text-sm text-gray-300 line-clamp-2 mb-3">
           {description?.slice(0, 100) || "No description"}...
         </p>
 
-        {/* Footer: Chef + Time */}
-        <div className="flex justify-between items-center pt-2 text-xs text-gray-400">
+        {/* Footer */}
+        <div className="flex justify-between items-center text-xs text-gray-400">
           <span className="flex items-center gap-1">
             <UserRound size={14} className="text-purple-300" />
             {chef}
