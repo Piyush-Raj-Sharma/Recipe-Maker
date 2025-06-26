@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { TimerIcon } from "lucide-react";
 import { nanoid } from "nanoid";
 import { RecipeContext } from "../context/RecipeContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CreateRecipe = () => {
   const {
@@ -14,6 +16,7 @@ const CreateRecipe = () => {
 
   const { data, setData } = useContext(RecipeContext);
   const [imagePreview, setImagePreview] = useState(null);
+  const navigate = useNavigate();
 
   const onSubmit = (recipe) => {
     recipe.id = nanoid();
@@ -22,6 +25,8 @@ const CreateRecipe = () => {
       recipe.image = URL.createObjectURL(recipe.image[0]);
     }
     setData([...data, recipe]);
+    toast.success('Recipe Created');
+    navigate('/recipe');
     reset();
     setImagePreview(null);
   };

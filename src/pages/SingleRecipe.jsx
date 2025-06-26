@@ -1,12 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { RecipeContext } from "../context/RecipeContext";
-import { TimerIcon, UserRound, ArrowLeft, UtensilsCrossed } from "lucide-react";
+import { TimerIcon, UserRound, ArrowLeft, UtensilsCrossed, CalendarClock } from "lucide-react";
+import UpdateDrawer from "../components/UpdateDrawer";
 
 const SingleRecipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data } = useContext(RecipeContext);
+  const [showUpdateDrawer, setShowUpdateDrawer] = useState(false);
 
   const recipe = data.find((item) => item.id === id);
 
@@ -18,8 +20,13 @@ const SingleRecipe = () => {
     );
   }
 
+  const formattedDate = new Date(recipe.createdAt).toLocaleString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-1 text-white">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-white">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
@@ -28,25 +35,28 @@ const SingleRecipe = () => {
         <ArrowLeft size={18} /> Back
       </button>
 
-      {/* Glassmorphism Card */}
-      <div className="bg-white/10 border border-white/10 backdrop-blur-lg shadow-xl rounded-2xl overflow-hidden">
-        {/* Image */}
-        <img
-          src={recipe.image}
-          alt={recipe.title}
-          className="w-full h-64 object-cover"
-        />
+      <div className="grid md:grid-cols-2 gap-10 items-start bg-white/5 border border-white/10 rounded-2xl backdrop-blur p-6 shadow-xl">
+        {/* Left - Image */}
+        <div>
+          <img
+            src={recipe.image}
+            alt={recipe.title}
+            className="rounded-xl object-cover w-full h-[400px]"
+          />
+        </div>
 
-        {/* Content */}
-        <div className="p-6 space-y-5">
+        {/* Right - Content */}
+        <div className="space-y-6">
           {/* Category Badge */}
-          <div className="inline-flex items-center gap-2 text-xs bg-purple-500/30 text-purple-200 font-semibold px-3 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 text-xs bg-purple-600/20 text-purple-300 font-semibold px-3 py-1 rounded-full">
             <UtensilsCrossed size={14} />
             {recipe.category || "Uncategorized"}
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl font-bold text-white">{recipe.title}</h1>
+          <h1 className="text-4xl font-bold leading-tight text-white">
+            {recipe.title}
+          </h1>
 
           {/* Meta Info */}
           <div className="flex flex-wrap gap-6 text-sm text-gray-300">
@@ -58,28 +68,54 @@ const SingleRecipe = () => {
               <TimerIcon size={16} className="text-purple-300" />
               {recipe.cookingTime} mins
             </span>
+            <span className="flex items-center gap-2">
+              <CalendarClock size={16} className="text-purple-300" />
+              {formattedDate}
+            </span>
           </div>
 
           {/* Description */}
-          <p className="text-sm leading-relaxed text-gray-200">
+          <p className="text-base text-gray-200 leading-relaxed">
             {recipe.description}
           </p>
 
           {/* Ingredients */}
           <div>
-            <h3 className="text-md font-semibold text-white mb-1">Ingredients:</h3>
+            <h3 className="text-lg font-semibold text-white mb-1">
+              🧂 Ingredients:
+            </h3>
             <p className="text-sm text-gray-300">{recipe.ingredients}</p>
           </div>
 
           {/* Instructions */}
           <div>
-            <h3 className="text-md font-semibold text-white mb-1">Instructions:</h3>
+            <h3 className="text-lg font-semibold text-white mb-1">
+              🧑‍🍳 Instructions:
+            </h3>
             <p className="text-sm text-gray-300 whitespace-pre-line">
               {recipe.instructions}
             </p>
           </div>
+
+          {/* Update Recipe */}
+          <div className="flex gap-4 pt-4">
+            <button
+              className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-500 active:scale-95 transition"
+              onClick={() => setShowUpdateDrawer(true)}
+            >
+              ✏️ Update Recipe
+            </button>
+            <button
+              className="bg-red-600 text-white px-6 py-2 rounded-xl hover:bg-red-500 active:scale-95 transition"
+            >
+              ❌ Delete Recipe
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Drawer Component */}
+      {showUpdateDrawer && <UpdateDrawer onClose={() => setShowUpdateDrawer(false)} />}
     </div>
   );
 };
