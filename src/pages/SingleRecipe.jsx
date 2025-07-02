@@ -49,7 +49,8 @@ const SingleRecipe = () => {
         <ArrowLeft size={18} /> Back
       </button>
 
-      <div className="grid md:grid-cols-2 gap-10 items-start bg-white/5 border border-white/10 rounded-2xl backdrop-blur p-6 shadow-xl hover:shadow-purple-700 transition-shadow duration-300">
+      <div className="grid md:grid-cols-2 gap-10 items-start bg-white/5 border border-white/10 hover:border-purple-500 rounded-2xl backdrop-blur p-6 transition-colors duration-300">
+
         {/* Left - Image */}
         <div>
           <img
