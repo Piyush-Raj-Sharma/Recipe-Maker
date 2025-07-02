@@ -1,13 +1,20 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { RecipeContext } from "../context/RecipeContext";
-import { TimerIcon, UserRound, ArrowLeft, UtensilsCrossed, CalendarClock } from "lucide-react";
+import {
+  TimerIcon,
+  UserRound,
+  ArrowLeft,
+  UtensilsCrossed,
+  CalendarClock,
+} from "lucide-react";
 import UpdateDrawer from "../components/UpdateDrawer";
+import { toast } from "react-toastify";
 
 const SingleRecipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data } = useContext(RecipeContext);
+  const { data, setData } = useContext(RecipeContext);
   const [showUpdateDrawer, setShowUpdateDrawer] = useState(false);
 
   const recipe = data.find((item) => item.id === id);
@@ -25,6 +32,13 @@ const SingleRecipe = () => {
     timeStyle: "short",
   });
 
+    const deleteHandler = () => {
+      const filterData = data.filter(recipe => recipe.id != id); 
+      setData(filterData);
+      toast.error('Recipe deleted');
+      navigate('/recipe');
+    };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-white">
       {/* Back Button */}
@@ -35,7 +49,7 @@ const SingleRecipe = () => {
         <ArrowLeft size={18} /> Back
       </button>
 
-      <div className="grid md:grid-cols-2 gap-10 items-start bg-white/5 border border-white/10 rounded-2xl backdrop-blur p-6 shadow-xl">
+      <div className="grid md:grid-cols-2 gap-10 items-start bg-white/5 border border-white/10 rounded-2xl backdrop-blur p-6 shadow-xl hover:shadow-purple-700 transition-shadow duration-300">
         {/* Left - Image */}
         <div>
           <img
@@ -107,6 +121,7 @@ const SingleRecipe = () => {
             </button>
             <button
               className="bg-red-600 text-white px-6 py-2 rounded-xl hover:bg-red-500 active:scale-95 transition"
+              onClick={deleteHandler}
             >
               ❌ Delete Recipe
             </button>
@@ -115,7 +130,9 @@ const SingleRecipe = () => {
       </div>
 
       {/* Drawer Component */}
-      {showUpdateDrawer && <UpdateDrawer onClose={() => setShowUpdateDrawer(false)} />}
+      {showUpdateDrawer && (
+        <UpdateDrawer onClose={() => setShowUpdateDrawer(false)} />
+      )}
     </div>
   );
 };

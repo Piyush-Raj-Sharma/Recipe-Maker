@@ -16,26 +16,32 @@ const CreateRecipe = () => {
 
   const { data, setData } = useContext(RecipeContext);
   const [imagePreview, setImagePreview] = useState(null);
+  const [imageBase64, setImageBase64] = useState(null);
   const navigate = useNavigate();
 
   const onSubmit = (recipe) => {
     recipe.id = nanoid();
     recipe.createdAt = new Date().toISOString();
-    if (recipe.image && recipe.image[0]) {
-      recipe.image = URL.createObjectURL(recipe.image[0]);
-    }
+    recipe.image = imageBase64; // store base64 image string
+
     setData([...data, recipe]);
-    toast.success('Recipe Created');
-    navigate('/recipe');
+    toast.success("Recipe Created");
+    navigate("/recipe");
     reset();
     setImagePreview(null);
+    setImageBase64(null);
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setImagePreview(URL.createObjectURL(file));
-    }
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);       // Show image preview
+      setImageBase64(reader.result);        // Store image in base64
+    };
+    reader.readAsDataURL(file); // Convert file to base64
   };
 
   return (

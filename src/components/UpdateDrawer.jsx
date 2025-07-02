@@ -10,7 +10,7 @@ const UpdateDrawer = ({ onClose }) => {
     handleSubmit,
     formState: { errors },
     reset,
-    setValue
+    setValue,
   } = useForm();
 
   const { data, setData } = useContext(RecipeContext);
@@ -30,14 +30,35 @@ const UpdateDrawer = ({ onClose }) => {
     }
   }, [recipe, setValue]);
 
+  //   const onSubmit = (updatedRecipe) => {
+  //     updatedRecipe.id = recipe.id;
+  //     updatedRecipe.createdAt = new Date().toISOString();
+  //     updatedRecipe.image = recipe.image;
+  //     const updatedData = data.map((item) =>
+  //       item.id === recipe.id ? updatedRecipe : item
+  //     );
+  //     setData(updatedData);
+  //     navigate(`/recipe/details/${id}`);
+  //     reset();
+  //     onClose();
+  //   };
+
   const onSubmit = (updatedRecipe) => {
-    updatedRecipe.id = recipe.id;
+    // updatedRecipe.id = recipe.id; // not needed since we are passing the privious data 
+    // updatedRecipe.image = recipe.image; // not needed since we are passing the privious data 
+
+    // ✅ Not needed: original ID and image are already part of the existing data being merged — no need to reassign them.
+
+
     updatedRecipe.createdAt = new Date().toISOString();
-    updatedRecipe.image = recipe.image;
-    const updatedData = data.map((item) =>
-      item.id === recipe.id ? updatedRecipe : item
-    );
-    setData(updatedData);
+
+    const index = data.findIndex((item) => item.id === recipe.id);
+    if (index !== -1) {
+      const updatedData = [...data]; // Create a shallow copy of the array
+      updatedData[index] = { ...updatedData[index], ...updatedRecipe }; // Merge and update that one object
+      setData(updatedData); // Set updated array to context
+    }
+
     navigate(`/recipe/details/${id}`);
     reset();
     onClose();
@@ -76,7 +97,7 @@ const UpdateDrawer = ({ onClose }) => {
               />
               {errors.title && (
                 <p className="text-xs text-red-400 mt-1">Title is required</p>
-              )} 
+              )}
             </div>
 
             <div>
@@ -96,7 +117,9 @@ const UpdateDrawer = ({ onClose }) => {
                 />
               </div>
               {errors.cookingTime && (
-                <p className="text-xs text-red-400 mt-1">Cooking time is required</p>
+                <p className="text-xs text-red-400 mt-1">
+                  Cooking time is required
+                </p>
               )}
             </div>
           </div>
@@ -112,7 +135,9 @@ const UpdateDrawer = ({ onClose }) => {
                 className="w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder:text-gray-400 border border-white/20 focus:ring-2 focus:ring-violet-500"
               />
               {errors.chef && (
-                <p className="text-xs text-red-400 mt-1">Chef's name is required</p>
+                <p className="text-xs text-red-400 mt-1">
+                  Chef's name is required
+                </p>
               )}
             </div>
 
@@ -130,7 +155,9 @@ const UpdateDrawer = ({ onClose }) => {
                 <option value="snack">Snack</option>
               </select>
               {errors.category && (
-                <p className="text-xs text-red-400 mt-1">Category is required</p>
+                <p className="text-xs text-red-400 mt-1">
+                  Category is required
+                </p>
               )}
             </div>
           </div>
@@ -145,7 +172,9 @@ const UpdateDrawer = ({ onClose }) => {
               className="w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder:text-gray-400 border border-white/20 focus:ring-2 focus:ring-violet-500"
             />
             {errors.description && (
-              <p className="text-xs text-red-400 mt-1">Description is required</p>
+              <p className="text-xs text-red-400 mt-1">
+                Description is required
+              </p>
             )}
           </div>
 
@@ -159,7 +188,9 @@ const UpdateDrawer = ({ onClose }) => {
               className="w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder:text-gray-400 border border-white/20 focus:ring-2 focus:ring-violet-500"
             />
             {errors.ingredients && (
-              <p className="text-xs text-red-400 mt-1">Ingredients are required</p>
+              <p className="text-xs text-red-400 mt-1">
+                Ingredients are required
+              </p>
             )}
           </div>
 
@@ -173,7 +204,9 @@ const UpdateDrawer = ({ onClose }) => {
               className="w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder:text-gray-400 border border-white/20 focus:ring-2 focus:ring-violet-500"
             />
             {errors.instructions && (
-              <p className="text-xs text-red-400 mt-1">Instructions are required</p>
+              <p className="text-xs text-red-400 mt-1">
+                Instructions are required
+              </p>
             )}
           </div>
           {/* Submit Button */}
