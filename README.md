@@ -26,7 +26,6 @@ A lightweight and fully responsive recipe management web application built using
 ---
 
 ## 📁 Folder Structure
-
 src/
 ├── assets/ # Recipe images
 ├── components/ # Reusable UI components like RecipeCard
@@ -41,7 +40,6 @@ src/
 
 ## 📦 Installation & Run Locally
 
-```bash
 git clone https://github.com/yourusername/recipe-manager.git
 cd recipe-manager
 npm install
