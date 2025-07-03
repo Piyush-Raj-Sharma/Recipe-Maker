@@ -64,7 +64,6 @@ npm run dev
 
 **Piyush Raj**  
 [Connect on LinkedIn](https://www.linkedin.com/in/piyush-raj-sharma/)  
-📧 piyushraj.cse@example.com
 
 ---
 
