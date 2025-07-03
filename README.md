@@ -1,12 +1,71 @@
-# React + Vite
+# 🍽️ Recipe Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight and fully responsive recipe management web application built using **ReactJS** and **TailwindCSS**. Users can browse delicious Indian & Indo-Chinese recipes, mark favorites, and even create their own recipes — all with persistent storage using the browser's `localStorage`.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ✅ Explore 15+ preloaded Indian and Indo-Chinese recipes
+- ❤️ Mark and manage your favorite recipes
+- ➕ Create and submit your own recipe with form validation
+- 📝 View detailed recipe info in a clean UI
+- 🗑️ Delete recipes from your collection
+- 📦 Data is persisted using `localStorage` (client-side)
+- 📱 Fully responsive across all screen sizes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: ReactJS
+- **Styling**: TailwindCSS
+- **State Management**: React `useState`, `useEffect`, `useContext`
+- **Persistence**: Browser `localStorage`
+
+---
+
+## 📁 Folder Structure
+
+src/
+├── assets/ # Recipe images
+├── components/ # Reusable UI components like RecipeCard
+├── context/ # RecipeContext for global state
+├── pages/ # Routes like Home, Create, Recipe, Favourite
+├── utils/ # Preloaded recipe data (someRecipes.js)
+├── App.jsx
+├── main.jsx
+└── index.css
+
+---
+
+## 📦 Installation & Run Locally
+
+```bash
+git clone https://github.com/yourusername/recipe-manager.git
+cd recipe-manager
+npm install
+npm run dev
+
+📌 Upcoming Improvements
+🔐 Add backend support with Node.js & MongoDB
+
+👥 User authentication & private recipe storage
+
+🌐 Cloud data syncing & recipe sharing
+
+🙋‍♂️ Author
+Piyush Raj
+Connect on LinkedIn
+📧 piyushraj.cse@example.com
+
+⭐️ Give it a Star
+If you liked this project, please ⭐️ the repo to support!
+
+📄 License
+MIT License © 2025 Piyush Raj
+
+
+---
+
+Let me know if you also want a `CONTRIBUTING.md`, live deployment setup guide, or backend API docs once you add Node.js!
