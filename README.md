@@ -26,44 +26,54 @@ A lightweight and fully responsive recipe management web application built using
 ---
 
 ## 📁 Folder Structure
+
+```
 src/
-├── assets/ # Recipe images
-├── components/ # Reusable UI components like RecipeCard
-├── context/ # RecipeContext for global state
-├── pages/ # Routes like Home, Create, Recipe, Favourite
-├── utils/ # Preloaded recipe data (someRecipes.js)
+├── assets/           # Recipe images
+├── components/       # Reusable UI components like RecipeCard
+├── context/          # RecipeContext for global state
+├── pages/            # Routes like Home, Create, Recipe, Favourite
+├── utils/            # Preloaded recipe data (someRecipes.js)
 ├── App.jsx
 ├── main.jsx
 └── index.css
+```
 
 ---
 
 ## 📦 Installation & Run Locally
 
+```bash
 git clone https://github.com/yourusername/recipe-manager.git
 cd recipe-manager
 npm install
 npm run dev
-
-📌 Upcoming Improvements
-🔐 Add backend support with Node.js & MongoDB
-
-👥 User authentication & private recipe storage
-
-🌐 Cloud data syncing & recipe sharing
-
-🙋‍♂️ Author
-Piyush Raj
-Connect on LinkedIn
-https://www.linkedin.com/in/piyush-raj-sharma/
-
-⭐️ Give it a Star
-If you liked this project, please ⭐️ the repo to support!
-
-📄 License
-MIT License © 2025 Piyush Raj
-
+```
 
 ---
 
-Let me know if you also want a `CONTRIBUTING.md`, live deployment setup guide, or backend API docs once you add Node.js!
+## 📌 Upcoming Improvements
+
+- 🔐 Add backend support with Node.js & MongoDB
+- 👥 User authentication & private recipe storage
+- 🌐 Cloud data syncing & recipe sharing
+
+---
+
+## 🙋‍♂️ Author
+
+**Piyush Raj**  
+[Connect on LinkedIn](https://www.linkedin.com/in/piyush-raj-sharma/)  
+📧 piyushraj.cse@example.com
+
+---
+
+## ⭐️ Give it a Star
+
+If you liked this project, please ⭐️ the repo to support!
+
+---
+
+## 📄 License
+
+MIT License © 2025 Piyush Raj
