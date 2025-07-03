@@ -57,7 +57,7 @@ npm run dev
 🙋‍♂️ Author
 Piyush Raj
 Connect on LinkedIn
-📧 piyushraj.cse@example.com
+https://www.linkedin.com/in/piyush-raj-sharma/
 
 ⭐️ Give it a Star
 If you liked this project, please ⭐️ the repo to support!
