@@ -9,6 +9,7 @@ import {
   CalendarClock,
 } from "lucide-react";
 import UpdateDrawer from "../components/UpdateDrawer";
+import { Heart, HeartOff } from "lucide-react";
 import { toast } from "react-toastify";
 
 const SingleRecipe = () => {
@@ -18,6 +19,10 @@ const SingleRecipe = () => {
   const [showUpdateDrawer, setShowUpdateDrawer] = useState(false);
 
   const recipe = data.find((item) => item.id === id);
+  const [isFavourite, setIsFavourite] = useState(() => {
+    const favs = JSON.parse(localStorage.getItem("favourites")) || [];
+    return favs.includes(id);
+  });
 
   if (!recipe) {
     return (
@@ -32,12 +37,46 @@ const SingleRecipe = () => {
     timeStyle: "short",
   });
 
-    const deleteHandler = () => {
-      const filterData = data.filter(recipe => recipe.id != id); 
-      setData(filterData);
-      toast.error('Recipe deleted');
-      navigate('/recipe');
+  const deleteHandler = () => {
+    const filterData = data.filter((recipe) => recipe.id != id);
+    setData(filterData);
+    localStorage.setItem("recipe", JSON.stringify(filterData));
+    toast.error("Recipe deleted");
+    navigate("/recipe");
+  };
+
+const toggleFavourite = () => {
+  const existingFavs = JSON.parse(localStorage.getItem("favourites")) || [];
+  let updatedFavs;
+
+  if (isFavourite) {
+    updatedFavs = existingFavs.filter((fav) => fav.id !== id);
+    toast.info("Removed from favourites");
+  } else {
+    const { id, title, description, image, cookingTime, chef, category } = recipe;
+
+    const newFav = {
+      id,
+      title,
+      description,
+      image,
+      cookingTime,
+      chef,
+      category,
     };
+
+    const isAlreadyAdded = existingFavs.some((fav) => fav.id === id);
+    updatedFavs = isAlreadyAdded ? existingFavs : [...existingFavs, newFav];
+
+    if (!isAlreadyAdded) {
+      toast.success("Added to favourites");
+    }
+  }
+
+  localStorage.setItem("favourites", JSON.stringify(updatedFavs));
+  setIsFavourite(!isFavourite);
+};
+
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-white">
@@ -50,14 +89,24 @@ const SingleRecipe = () => {
       </button>
 
       <div className="grid md:grid-cols-2 gap-10 items-start bg-white/5 border border-white/10 hover:border-purple-500 rounded-2xl backdrop-blur p-6 transition-colors duration-300">
-
         {/* Left - Image */}
-        <div>
+        <div className="relative">
           <img
             src={recipe.image}
             alt={recipe.title}
             className="rounded-xl object-cover w-full h-[400px]"
           />
+          <button
+            onClick={toggleFavourite}
+            className="absolute top-4 right-4 bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
+            title={isFavourite ? "Remove from Favourites" : "Add to Favourites"}
+          >
+            {isFavourite ? (
+              <Heart className="text-red-500 fill-red-500" />
+            ) : (
+              <HeartOff className="text-gray-300" />
+            )}
+          </button>
         </div>
 
         {/* Right - Content */}

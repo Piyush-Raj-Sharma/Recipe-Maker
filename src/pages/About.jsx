@@ -11,7 +11,7 @@ const About = () => {
             <img
               src="https://images.unsplash.com/photo-1592457711340-2412dc07b733?q=80&w=666&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="About Cooking"
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full object-cover object-center "
             />
           </div>
 
@@ -19,7 +19,7 @@ const About = () => {
           <div className="md:w-1/2 p-10">
             {/* Header */}
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-              About RecipeVerse 🍽️
+              About RecipeHub 🍽️
             </h1>
             <p className="text-gray-400 text-center text-lg mb-10">
               Your ultimate destination for delicious inspirations, one recipe at a time.

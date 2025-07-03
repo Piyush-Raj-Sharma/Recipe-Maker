@@ -57,6 +57,7 @@ const UpdateDrawer = ({ onClose }) => {
       const updatedData = [...data]; // Create a shallow copy of the array
       updatedData[index] = { ...updatedData[index], ...updatedRecipe }; // Merge and update that one object
       setData(updatedData); // Set updated array to context
+       localStorage.setItem('recipe', JSON.stringify(updatedData));
     }
 
     navigate(`/recipe/details/${id}`);

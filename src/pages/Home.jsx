@@ -28,7 +28,7 @@ const Home = () => {
         className="relative mt-9 h-[95vh] bg-cover bg-center flex items-center justify-center text-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1606914469030-681790351049?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            "url('https://png.pngtree.com/background/20230528/original/pngtree-an-arrangement-of-various-indian-food-picture-image_2778221.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-black/50 z-0"></div>
@@ -137,7 +137,7 @@ const Home = () => {
       <section className="py-16 px-[8%] bg-gradient-to-r from-orange-600 to-yellow-500 text-white text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Cook & Share with Love ❤️</h2>
         <p className="mb-8 text-lg">
-          आज ही जुड़िए RecipeVerse के साथ और अपनी खास recipes दुनिया से शेयर करें।
+          आज ही जुड़िए RecipeHub के साथ और अपनी खास recipes दुनिया से शेयर करें।
         </p>
         <Link
           to="/create"
